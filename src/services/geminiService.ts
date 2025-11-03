@@ -47,27 +47,27 @@ export const generateEvaluationModule = async (prompt: string): Promise<Omit<Eva
     });
 
     // Per Gemini API guidelines, response.text should be used to get text content.
-    const jsonString = response.text.trim();
+    const jsonString = (response.text ?? '').trim();
     if (!jsonString) {
-        console.error("La API de Gemini devolvió una respuesta vacía.");
-        return null;
+      console.error("La API de Gemini devolvió una respuesta vacía.");
+      return null;
     }
 
     const parsedModule = JSON.parse(jsonString) as Omit<EvaluationModule, 'id'>;
-    
+
     // Basic validation
     if (!parsedModule.name || !parsedModule.type) {
       console.error("Al módulo generado le faltan los campos obligatorios 'name' o 'type'.", parsedModule);
       return null;
     }
-    
+
     if (parsedModule.type === 'select' && (!parsedModule.options || !Array.isArray(parsedModule.options))) {
-       console.warn("Al módulo 'select' generado le falta el array 'options'. Se usará un array vacío por defecto.", parsedModule);
-       parsedModule.options = [];
+      console.warn("Al módulo 'select' generado le falta el array 'options'. Se usará un array vacío por defecto.", parsedModule);
+      parsedModule.options = [];
     }
 
-    if(parsedModule.type === 'text') {
-        delete parsedModule.options;
+    if (parsedModule.type === 'text') {
+      delete parsedModule.options;
     }
 
     return parsedModule;
