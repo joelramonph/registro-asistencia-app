@@ -1,0 +1,5 @@
+{
+  "name": "Registro de Asistencia Estudiantil",
+  "description": "Una aplicación web interactiva para que los educadores gestionen la asistencia de los estudiantes y las evaluaciones cualitativas. Esta herramienta simula la conexión a una Hoja de Google para importar listas de estudiantes, permite marcar rápidamente la asistencia diaria y cuenta con un sistema configurable para agregar módulos de evaluación personalizados con la ayuda de la IA de Gemini.",
+  "requestFramePermissions": []
+}
